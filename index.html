@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dinner Date Invite 🍽️</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f5ebe0, #e3d5ca);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      color: #7f5539;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    .buttons {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .yes {
+      background-color: #3AAFA9;
+      color: white;
+    }
+    .no {
+      background-color: #d5bdaf;
+      color: #000;
+    }
+    button:hover {
+      opacity: 0.85;
+    }
+    .image {
+      margin-top: 30px;
+      max-width: 300px;
+      display: none;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    .message {
+      margin-top: 30px;
+      color: #7f5539;
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+    #secretInput {
+      display: none;
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 1rem;
+      border: 2px solid #7f5539;
+      border-radius: 10px;
+      width: 250px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Will you go to dinner with me tonight? 🍽️💕</h1>
+  <div class="buttons">
+    <button class="yes" onclick="yesClick()">Yes</button>
+    <button class="no" onclick="noClick()">No</button>
+  </div>
+
+  <input
+    type="text"
+    id="secretInput"
+    placeholder='Type "okiess baby" '
+    autocomplete="off"
+  />
+  <p class="message" id="message"></p>
+  <img id="imageDisplay" class="image" src="" alt="Mood image" />
+
+  <script>
+    let noClickCount = 0;
+
+    function yesClick() {
+      const image = document.getElementById("imageDisplay");
+      image.src = "https://i0.wp.com/bubududuworld.com/wp-content/uploads/2024/10/Bubu-loving-Dudu.png?fit=1500%2C1500&ssl=1"; // happy image
+      image.style.display = "block";
+
+      document.getElementById("message").innerText = "Yay! Get ready, I'll pick you up later 💖";
+      document.getElementById("secretInput").style.display = "none";
+      document.querySelector(".no").style.display = "none";
+      document.querySelector(".yes").style.display = "none";
+    }
+
+    function noClick() {
+      const noButton = document.querySelector(".no");
+      const yesButton = document.querySelector(".yes");
+      const image = document.getElementById("imageDisplay");
+      const input = document.getElementById("secretInput");
+      const message = document.getElementById("message");
+
+      message.innerText = "";
+
+      if (noClickCount === 0) {
+        noButton.innerText = "I'll be really sad 😢";
+        image.src = "https://media.tenor.com/8vJ4ch5LTTAAAAAj/bubu-dudu-sseeyall.gif"; // sad 1
+        image.style.display = "block";
+      } else if (noClickCount === 1) {
+        noButton.innerText = "Look I'm crying 😢";
+        image.src = "https://media.tenor.com/yZoKXA08ZyYAAAAe/bubu-bubu-dudu.png"; // sad 2
+        image.style.display = "block";
+      } else if (noClickCount === 2) {
+        noButton.style.display = "none";
+        yesButton.style.display = "none"; // Hides Yes button here
+        input.style.display = "block";
+        input.value = "";
+        input.focus();
+      }
+
+      noClickCount++;
+    }
+
+    document.getElementById("secretInput").addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        const val = event.target.value.trim().toLowerCase();
+        if (val === "okiess baby") {
+          yesClick(); // behaves like clicking yes
+        } else {
+          document.getElementById("message").innerText = "Oops, that's not it! Try again ❤️";
+        }
+      }
+    });
+  </script>
+</body>
+</html>
